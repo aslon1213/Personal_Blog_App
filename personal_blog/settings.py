@@ -75,7 +75,7 @@ TEMPLATES = [
         },
     },
 ]
-
+#
 WSGI_APPLICATION = 'personal_blog.wsgi.application'
 
 
