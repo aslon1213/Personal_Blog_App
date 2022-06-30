@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- TinyMce editor plugin-->
+    <script src="https://cdn.tiny.cloud/1/htpb1yxk7hgfne2d5rql4ywcv81fo8cfrmgo1hodnjs9mzfp/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+
+
+</head>
+
+<body>
+    {%block content%}
+    {%endblock content%}
+    
+    <!-- TinyMce editor plugin-->
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinymcespellchecker codesample',
+        toolbar: 'a11ycheck casechange checklist export formatpainter image editimage pageembed permanentpen table tableofcontents codesample',
+        toolbar_mode: 'floating',
+        content_css: 'writer'
+      });
+    </script>
+  </body>
+</html>

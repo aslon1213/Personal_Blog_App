@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{%block content%}
+
+{% for post in posts %}
+    <div>
+        <a href="{% url 'post' post.id %}" >{{post.id}}</a>
+        <a href="{% url 'edit_post' post.id %}"> EDIT</a>
+        <br>
+        {{post.name|slice:"100"}}
+        <br>
+        {{post.post|slice:"500" |safe }}
+    </div>
+
+{% endfor %}
+
+{% endblock %}
