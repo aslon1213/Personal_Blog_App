@@ -38,3 +38,6 @@ def edit_post(request,pk):
     }
     return render(request, 'posts/edit_post.html', context)
 
+def main_page(request):
+    context = {}
+    return render(request, 'main.html', context)

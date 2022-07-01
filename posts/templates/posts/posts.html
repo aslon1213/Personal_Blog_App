@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {%block content%}
-
 {% for post in posts %}
     <div>
         <a href="{% url 'post' post.id %}" >{{post.id}}</a>
@@ -9,9 +8,7 @@
         <br>
         {{post.name|slice:"100"}}
         <br>
-        {{post.post|slice:"500" |safe }}
+        {{post.post|slice:"100" |safe }}
     </div>
-
 {% endfor %}
-
 {% endblock %}
