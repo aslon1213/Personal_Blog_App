@@ -1,10 +1,112 @@
 {% extends 'base.html' %}
 
 {% block content%}
-
-{{post.name}}
-
-{{post.post|safe}}
+<style>
+    .post-body img {
+      width: 100%;
+    }
+  </style>
+  
+      <div class="container">
+        <div class="row">
+          <!-- Latest Posts -->
+          <main class="post blog-post col-lg-8"> 
+            <div class="container">
+              <div class="post-single">
+                {% if post.post_thumbnail %}
+                <div class="post-thumbnail"><img src="{{ post.post_thumbnail.url }}" alt="..." class="img-fluid"></div>
+                {% endif %}
+                <div class="post-details">
+                  <div class="post-meta d-flex justify-content-between">
+                    {%comment%}
+                    <div class="category">
+                      {% for cat in post.categories.all %}
+                      <a href="#">{{ cat }}</a>
+                      {% endfor %}
+                    {%endcomment%}
+                    </div>
+                    <div>
+                      <a href="">Update</a>
+                      <a href="">Delete</a>
+                    </div>
+                  </div>
+                  <h1>{{ post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+                  <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
+                      <div class="avatar"><img src="{{ post.owner.profile_image.url }}" alt="..." class="img-fluid"></div>
+                      <div class="title"><span>{{ post.owner.username }}</span></div></a>
+                    <div class="d-flex align-items-center flex-wrap">       
+                      <div class="date"><i class="icon-clock"></i> {{ post.created|timesince }} ago</div>
+                      <div class="views"><i class="icon-eye"></i> {{ post.views_count }}</div>
+                      <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments_count }}</div>
+                    </div>
+                  </div>
+                  <div class="post-body">
+                    {{ post.post | safe }}
+                  </div>
+                  <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
+                  {% if post.previous_post %}
+                  <a href="{{ post.previous_post.get_absolute_url }}" class="prev-post text-left d-flex align-items-center">
+                      <div class="icon prev"><i class="fa fa-angle-left"></i></div>
+                      <div class="text"><strong class="text-primary">Previous Post </strong>
+                        <h6>{{ post.previous_post.title }}</h6>
+                      </div>
+                  </a>
+                  {% endif %}
+                  {% if post.next_post %}
+                  <a href="{{ post.next_post.get_absolute_url }}" class="next-post text-right d-flex align-items-center justify-content-end">
+                      <div class="text"><strong class="text-primary">Next Post </strong>
+                        <h6>{{ post.next_post.title }}</h6>
+                      </div>
+                      <div class="icon next"><i class="fa fa-angle-right">   </i></div>
+                  </a>
+                  {% endif %}
+                  </div>
+                  <div class="post-comments">
+                    <header>
+                      <h3 class="h6">Post Comments<span class="no-of-comments">({{ post.comments.count }})</span></h3>
+                    </header>
+                    {% for commenti in comments %}
+                    <div class="comment">
+                      <div class="comment-header d-flex justify-content-between">
+                        <div class="user d-flex align-items-center">
+                          <div class="image">
+                          </div>
+                          <div class="title"><strong>{{ commenti.user.username }}</strong><span class="date">{{ commenti.created|timesince }} ago</span></div>
+                        </div>
+                      </div>
+                      <div class="comment-body">
+                        <p>{{ commenti.content }}</p>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                  {% if request.user.is_authenticated %}
+                  <div class="add-comment">
+                    <header>
+                      <h3 class="h6">Leave a reply</h3>
+                    </header>
+                    <form method="POST" action="." class="commenting-form">
+                      {% csrf_token %}
+                      <div class="row">
+                        <div class="form-group col-md-12">
+                          {{ form }}
+                        </div>
+                        <div class="form-group col-md-12">
+                          <button type="submit" class="btn btn-secondary">Submit Comment</button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  {% else %}
+                  <a href="{% url 'login' %}" class="btn btn-primary">Login to comment</a>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          </main>
+          {%comment%}{% include 'sidebar.html' with most_recent=most_recent category_count=category_count %} {%endcomment%}       
+        </div>
+      </div>
 
 
 

@@ -23,15 +23,13 @@
         <div class="menus d-flex">
           <ul class="list-unstyled">
             <li> <a href="#">My Account</a></li>
-            <li> <a href="#">Add Listing</a></li>
-            <li> <a href="#">Pricing</a></li>
+            <li> <a href="{% url 'subscribe' %}">Subscribe</a></li>
             <li> <a href="#">Privacy &amp; Policy</a></li>
           </ul>
           <ul class="list-unstyled">
-            <li> <a href="#">Our Partners</a></li>
-            <li> <a href="#">FAQ</a></li>
+            <li> <a href="#">API</a></li>
             <li> <a href="#">How It Works</a></li>
-            <li> <a href="#">Contact</a></li>
+            <li> <a href="#">Contributors</a></li>
           </ul>
         </div>
       </div>
@@ -52,10 +50,10 @@
     <div class="container">
       <div class="row">
         <div class="col-md-6">
-          <p>&copy; 2017. All rights reserved. Your great site.</p>
+          <p>&copy; 2022. All rights reserved</p>
         </div>
         <div class="col-md-6 text-right">
-          <p>Template By <a href="https://bootstraptemple.com" class="text-white">Bootstrap Temple</a>
+          {% comment %}<p>Template By <a href="https://bootstraptemple.com" class="text-white">Bootstrap Temple</a>{% endcomment %}
             <!-- Please do not remove the backlink to Bootstrap Temple unless you purchase an attribution-free license @ Bootstrap Temple or support us at http://bootstrapious.com/donate. It is part of the license conditions. Thanks for understanding :)                         -->
           </p>
         </div>

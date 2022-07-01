@@ -2,13 +2,71 @@
 
 {%block content%}
 {% for post in posts %}
-    <div>
-        <a href="{% url 'post' post.id %}" >{{post.id}}</a>
-        <a href="{% url 'edit_post' post.id %}"> EDIT</a>
-        <br>
-        {{post.name|slice:"100"}}
-        <br>
-        {{post.post|slice:"100" |safe }}
+{% if post.is_ready_to_post %}
+<div class="post col-xl-6">
+    {% if post.post_thumbnail %}
+    <div class="post-thumbnail"><a href="{% url 'post' post.id %}"><img src="{{ post.post_thumbnail.url }}" alt="..." class="img-fluid"></a></div>
+    {% endif %}
+    <div class="post-details">
+      <div class="post-meta d-flex justify-content-between">
+        {% comment %} <div class="date meta-last">20 May | 2016</div> 
+        <div class="category">
+        {% for cat in post.categories.all %}
+        <a href="#">{{ cat }}</a>
+        {% endfor %}
+        </div>
+        {% endcomment %}
+      </div><a href="{% url 'post' post.id %}">
+        <h3 class="h4">{{ post.title }}</h3></a>
+      <p class="text-muted">{{ post.post | safe | slice:"70"}}</p>
+      <footer class="post-footer d-flex align-items-center">
+        {% comment %}<a href="#" class="author d-flex align-items-center flex-wrap">
+          <div class="avatar"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
+          <div class="title"><span>{{ post.author.user.username }}</span></div>{% endcomment %}
+        </a>
+        <div class="date">Created: {{ post.created|timesince }} ago</div>
+        {% comment %}<div class="comments meta-last"><i class="icon-comment"></i>{{ post.comment_count }}</div>{% endcomment %}
+      </footer>
     </div>
+  </div>
+{%endif%}
 {% endfor %}
 {% endblock %}
+<!-- Pagination -->
+<!--
+
+
+            
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if queryset.has_previous %}                
+                <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                {% endif %}
+                <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.number }}" class="page-link active">{{ queryset.number }}</a></li>
+                {% if queryset.has_next %}
+                <li class="page-item"><a href="?{{ page_request_var }}={{ queryset.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+
+            {% if is_paginated %}
+            
+            <nav aria-label="Page navigation example">
+              <ul class="pagination pagination-template d-flex justify-content-center">
+                {% if page_obj.has_previous %}                
+                <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.previous_page_number }}" class="page-link"> <i class="fa fa-angle-left"></i></a></li>
+                {% endif %}
+                <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.number }}" class="page-link active">{{ page_obj.number }}</a></li>
+                {% if page_obj.has_next %}
+                <li class="page-item"><a href="?{{ page_request_var }}={{ page_obj.next_page_number }}" class="page-link"> <i class="fa fa-angle-right"></i></a></li>
+                {% endif %}
+              </ul>
+            </nav>
+            
+            {% endif %}
+          </div>
+        </main>
+        {% include 'sidebar.html' with most_recent=most_recent category_count=category_count %}
+      </div>
+    </div>
+-->

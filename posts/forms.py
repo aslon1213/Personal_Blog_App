@@ -5,4 +5,4 @@ from .models import Post
 class CustomPostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['name', 'post']
+        fields = ['owner', 'colloborators','title', 'post','preview','tags', 'is_ready_to_post', 'post_thumbnail']

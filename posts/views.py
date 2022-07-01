@@ -22,7 +22,8 @@ def posts(request):
 
 def post(request, pk):
     post = Post.objects.get(id=pk)
-    return render(request, 'posts/post.html', context={'post':post})
+    comments = post.comments.all()
+    return render(request, 'posts/post.html', context={'post':post, 'comments':comments})
 
 def edit_post(request,pk):
     post = Post.objects.get(id=pk)
