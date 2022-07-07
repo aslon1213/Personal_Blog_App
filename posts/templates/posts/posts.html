@@ -1,46 +1,37 @@
 {% extends 'base.html' %}
 
 {%block content%}
-{% for post in posts %}
-{% if post.is_ready_to_post %}
-<div class="post col-xl-6">
-    {% if post.post_thumbnail %}
-    <div class="post-thumbnail"><a href="{% url 'post' post.id %}"><img src="{{ post.post_thumbnail.url }}" alt="..." class="img-fluid"></a></div>
-    {% endif %}
-    <div class="post-details">
-      <div class="post-meta d-flex justify-content-between">
-        {% comment %} <div class="date meta-last">20 May | 2016</div> 
-        <div class="category">
-        {% for cat in post.categories.all %}
-        <a href="#">{{ cat }}</a>
-        {% endfor %}
-        </div>
-        {% endcomment %}
-      </div><a href="{% url 'post' post.id %}">
-        <h3 class="h4">{{ post.title }}</h3></a>
-        {% if post.preview %}
-        <div><p class="text-muted">{{post.preview}}</p></div>
-        {% else %}
-        <div><p class="text-muted">{{ post.post | safe | slice:"70"}}</p></div>
-        {% endif %}
-      <footer class="post-footer d-flex align-items-center">
-        {% comment %}<a href="#" class="author d-flex align-items-center flex-wrap">
-          <div class="avatar"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid"></div>
-          <div class="title"><span>{{ post.author.user.username }}</span></div>{% endcomment %}
-        </a>
-        <div class="date">Created: {{ post.created|timesince }} ago</div>
-        {% comment %}<div class="comments meta-last"><i class="icon-comment"></i>{{ post.comment_count }}</div>{% endcomment %}
-      </footer>
+
+<div class="accordion align-items-center text-center col-md-12" id="accordionExample ">
+  {% for post in posts %}
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' %}">
+      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' %}" aria-expanded="true" aria-controls="collapseOne">
+        <ul class="list-group col-md-13">
+          <li class="list-group-item align-items-center"> <a href=""><ul class="list-group list-group-horizontal col-md-6">
+            <li class="list-group-item col-md-6" style="border: invisible;"><img class="rounded mx-auto d-block" style="width: 35px; height: 35px; border-radius: 100%;" src="{{post.owner.profile_image.url}}" alt="{{post.owner.username}}"></li>
+            <li class="list-group-item col-md-6"> <a href="#">{{post.owner.username}}</a> </li>
+          </ul></a> 
+          </li>
+          <li class="list-group-item fw-bold fs-2" >{{post.title}}</li>
+        </ul>
+      </button>
+    </h2>
+    <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' %}" data-bs-parent="#accordionExample">
+      <div class="accordion-body" >
+        <strong class="text-center">{{post.preview|slice:'200'}}</strong>
+        <div> {{post.post | safe}} </div>
+        <a href="{% url 'post' post.id %}">view post</a>
+      </div>
     </div>
   </div>
-{%endif%}
-{% endfor %}
+  {%endfor%}
+  </div>
+
+
 {% endblock %}
 <!-- Pagination -->
 <!--
-
-
-            
             <nav aria-label="Page navigation example">
               <ul class="pagination pagination-template d-flex justify-content-center">
                 {% if queryset.has_previous %}                

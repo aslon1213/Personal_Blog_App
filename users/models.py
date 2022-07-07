@@ -4,6 +4,9 @@ import uuid
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 
+class StaffUsers(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
+
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -20,6 +23,10 @@ class UserProfile(models.Model):
     youtube = models.CharField(max_length=200, blank=True, null=True)
     telegram = models.CharField(max_length=200, blank=True, null=True)
     website = models.CharField(max_length=200, blank=True, null=True)
+    
+
+    #interests
+    interests = models.ManyToManyField('Interest',blank=True )
 
     #id and created time
     created = models.DateTimeField(auto_now_add=True)
@@ -34,13 +41,12 @@ class UserProfile(models.Model):
 """class newsletter_senders(models.Model):
     pass"""
 
-class subscribers(models.Model):
+class Subscriber(models.Model):
     name = models.CharField(max_length=200, null=True)
     email = models.EmailField(max_length=250)
     #id and created time
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default = uuid.uuid4,unique=True, primary_key=True, editable=False)
-
 
     def __str__(self) -> str:
         return str(self.name)
@@ -48,3 +54,12 @@ class subscribers(models.Model):
 #
 #class Messages:
 #
+
+class Interest(models.Model):
+    name = models.CharField(max_length=200, null=True)
+    #id and created time
+    created = models.DateTimeField(auto_now_add=True)
+    id = models.UUIDField(default = uuid.uuid4,unique=True, primary_key=True, editable=False)
+
+    def __str__(self) -> str:
+        return self.name

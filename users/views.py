@@ -1,11 +1,12 @@
 
+from cProfile import Profile
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, logout, authenticate
 
 from django.contrib import messages
 #models
-from .models import UserProfile, subscribers
+from .models import UserProfile, Subscriber
 from django.contrib.auth.models import User
 #forms
 from .forms import UserLoginForm, UserRegistrationForm, SubscriberForm
@@ -84,20 +85,31 @@ def logout_user(request):
     return redirect('login')
 
 
-def account(request):
-    context = {}
-    render(request, 'users/account.html', context)
-
-
 def register_subscriber(request):
     if request.method == "POST":
         email = request.POST['email']
         name = request.POST['name']
-        subscribers.objects.create(
+        Subscriber.objects.create(
             name = name,
             email = email
         )
         messages.success(request, 'Thank you for subscribing')
         return redirect('posts')
+
+
+@login_required(login_url='login')
+def account_page(request):
+    profile = request.user.userprofile
+    context = {'profile':profile}
+    return render(request, 'users/account.html', context)
+
+
+def contributors_page(request):
+    profiles = Profile.objects.all()
+
+
+def add_interests(interest_list):
+    pass
+
 
             

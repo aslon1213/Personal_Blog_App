@@ -3,7 +3,7 @@ from ast import Div
 from django.forms import ModelForm
 #custome forms
 from django import forms
-from .models import UserProfile, subscribers
+from .models import UserProfile, Subscriber
 from django.contrib.auth.models import User
 
 #crispy forms
@@ -91,5 +91,5 @@ class SubscriberForm(ModelForm):
         self.helper.form_action = 'login'
         self.helper.add_input(Submit('submit', 'Submit'))
     class Meta:
-        model = subscribers
+        model = Subscriber
         fields = ['email', 'name']

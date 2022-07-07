@@ -7,7 +7,7 @@
     <div class="card-body">
         {%csrf_token%}
         {% crispy form form.helper %}
-      <a href="{% url 'login' %}" class="btn btn-primary stretched-link">Log in</a>
+      <a href="{% url 'login' %}" class="btn btn-primary">Log in</a>
     </div>
   </div>
 {% endblock %}

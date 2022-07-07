@@ -5,7 +5,7 @@ from users.models import UserProfile
 # Create your models here.
 class Post(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
-    colloborators = models.ManyToManyField(UserProfile, related_name='colloborators', blank=True, null=True)
+    colloborators = models.ManyToManyField(UserProfile, related_name='colloborators', blank=True)
     title = models.CharField(max_length=500, null=True)
     preview = models.CharField(max_length=100, null=True, blank=True)
     post = HTMLField()
@@ -63,8 +63,13 @@ class Comment(models.Model):
     id = models.UUIDField(default = uuid.uuid4,unique=True, primary_key=True, editable=False)
 
 
+    class Meta:
+        ordering = ['-created']
+
     def __str__(self):
         return self.user.username
+
+    
 
 class Vote(models.Model):
     """"""

@@ -2,7 +2,7 @@
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
-from .models import Post
+from .models import Post, Comment
 from .forms import CustomPostCreationForm
 # Create your views here.
 @login_required(login_url = 'login')
@@ -24,14 +24,31 @@ def create_post(request):
     return render(request, 'posts/create_post.html', context)
 
 def posts(request):
+    numbers = {
+        1:'One',
+        2:'Two',
+        3:'Three',
+        4:'Four',
+        5:'Five'
+    }
     posts = Post.objects.all()
     latest_posts = posts[:3]
-    context = {'posts':posts, 'latest_posts':latest_posts}
+    context = {'posts':posts, 'latest_posts':latest_posts, 'numbers':numbers}
     
     return render(request, 'posts/posts.html', context)
 
 def post(request, pk):
     post = Post.objects.get(id=pk)
+    authentificated_profile = request.user.userprofile
+
+    if request.method == "POST":
+        comment_body = request.POST['comment_body']
+        comemnt = Comment.objects.create(
+            content = comment_body,
+            user = authentificated_profile,
+            post = post,
+        )
+        messages.success(request, 'You made a comment')
     comments = post.comments.all()
     post.update_views_count(1)
     
@@ -79,3 +96,7 @@ def delete_post(request, pk):
 def main_page(request):
     context = {}
     return render(request, 'main.html', context)
+
+# def create_comment()
+# def vote()
+#messaging 

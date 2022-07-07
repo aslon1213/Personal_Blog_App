@@ -10,7 +10,7 @@
       <div class="container">
         <div class="row">
           <!-- Latest Posts -->
-          <main class="post blog-post col-lg-8"> 
+          <main class="post blog-post"> 
             <div class="container">
               <div class="post-single">
                 {% if post.post_thumbnail %}
@@ -40,7 +40,7 @@
                       <div class="comments meta-last"><i class="icon-comment"></i>{{ post.comments_count }}</div>
                     </div>
                   </div>
-                  <div class="post-body">
+                  <div class="post-body col-md-9">
                     {{ post.post | safe }}
                   </div>
                   <div class="posts-nav d-flex justify-content-between align-items-stretch flex-column flex-md-row">
@@ -61,6 +61,7 @@
                   </a>
                   {% endif %}
                   </div>
+
                   <div class="post-comments">
                     <header>
                       <h3 class="h6">Post Comments<span class="no-of-comments">({{ post.comments.count }})</span></h3>
@@ -80,16 +81,16 @@
                     </div>
                     {% endfor %}
                   </div>
-                  {% if request.user.is_authenticated %}
+                  {% if request.user.is_authenticated and request.user.userprofile.id != post.owner.id %}
                   <div class="add-comment">
                     <header>
                       <h3 class="h6">Leave a reply</h3>
                     </header>
-                    <form method="POST" action="." class="commenting-form">
+                    <form method="POST" action="{% url 'post' post.id %}" class="commenting-form">
                       {% csrf_token %}
                       <div class="row">
                         <div class="form-group col-md-12">
-                          {{ form }}
+                          <textarea name="comment_body" id="" cols="100" rows="10"></textarea>
                         </div>
                         <div class="form-group col-md-12">
                           <button type="submit" class="btn btn-secondary">Submit Comment</button>
@@ -98,7 +99,9 @@
                     </form>
                   </div>
                   {% else %}
+                  {% if not request.user.is_authenticated %}
                   <a href="{% url 'login' %}" class="btn btn-primary">Login to comment</a>
+                  {%endif%}
                   {% endif %}
                 </div>
               </div>
@@ -111,3 +114,5 @@
 
 
 {% endblock%}
+
+

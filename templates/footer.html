@@ -23,7 +23,7 @@
         <div class="menus d-flex">
           <ul class="list-unstyled">
             <li> <a href="#">My Account</a></li>
-            <li class="" data-toggle="modal" data-target="#exampleModal"> <a href="#">Subscribe</a></li>
+            <li data-toggle="modal" data-target="#exampleModalCenter"> <a href="#">Subscribe</a></li>
             <li> <a href="#">Privacy &amp; Policy</a></li>
           </ul>
           <ul class="list-unstyled">
@@ -33,18 +33,7 @@
           </ul>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="latest-posts">
-          {% for post in latest_posts %}
-          <a href="{% url 'post' post.id %}">
-            <div class="post d-flex align-items-center">
-              <div class="title"><strong>{{post.title|slice:"30"}}</strong>
-              <span class="date last-meta">{{post.preview|slice:"30"}}</span></div>
-            </div>
-          </a>
-          {%endfor%}
-        </div>
-      </div>
+     
     </div>
   </div>
   <div class="copyrights">
@@ -65,11 +54,11 @@
 
 
   <!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Subcribe</h5>
+        <h5 class="modal-title" style="color: black;" id="exampleModalLabel">Subcribe to Newsletter</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
