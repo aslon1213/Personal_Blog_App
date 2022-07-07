@@ -23,7 +23,7 @@
         <div class="menus d-flex">
           <ul class="list-unstyled">
             <li> <a href="#">My Account</a></li>
-            <li> <a href="{% url 'subscribe' %}">Subscribe</a></li>
+            <li class="" data-toggle="modal" data-target="#exampleModal"> <a href="#">Subscribe</a></li>
             <li> <a href="#">Privacy &amp; Policy</a></li>
           </ul>
           <ul class="list-unstyled">
@@ -35,13 +35,14 @@
       </div>
       <div class="col-md-4">
         <div class="latest-posts">
-          <a href="#">
+          {% for post in latest_posts %}
+          <a href="{% url 'post' post.id %}">
             <div class="post d-flex align-items-center">
-              <div class="image"><img src="" alt="..." class="img-fluid"></div>
-              <div class="title"><strong>Latest posts</strong>
-              <span class="date last-meta">That post info</span></div>
+              <div class="title"><strong>{{post.title|slice:"30"}}</strong>
+              <span class="date last-meta">{{post.preview|slice:"30"}}</span></div>
             </div>
           </a>
+          {%endfor%}
         </div>
       </div>
     </div>
@@ -60,4 +61,35 @@
       </div>
     </div>
   </div>
+
+
+
+  <!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Subcribe</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action="{% url 'subscribe' %}" method="POST">
+          {% csrf_token %}
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="email" id="form1Example13" class="form-control form-control-lg" name='email' placeholder="Email address" />
+            </div>
+            <!-- Email input -->
+            <div class="form-outline mb-4">
+              <input type="text" id="form2Example1" class="form-control" name="name" placeholder="Name" />
+            </div>
+            <input type="submit" class="btn btn-primary" value="subscribe" />
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
 </footer>

@@ -18,7 +18,11 @@
         {% endcomment %}
       </div><a href="{% url 'post' post.id %}">
         <h3 class="h4">{{ post.title }}</h3></a>
-      <p class="text-muted">{{ post.post | safe | slice:"70"}}</p>
+        {% if post.preview %}
+        <div><p class="text-muted">{{post.preview}}</p></div>
+        {% else %}
+        <div><p class="text-muted">{{ post.post | safe | slice:"70"}}</p></div>
+        {% endif %}
       <footer class="post-footer d-flex align-items-center">
         {% comment %}<a href="#" class="author d-flex align-items-center flex-wrap">
           <div class="avatar"><img src="{{ post.author.profile_picture.url }}" alt="..." class="img-fluid"></div>

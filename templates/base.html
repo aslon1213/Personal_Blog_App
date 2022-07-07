@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,14 +9,38 @@
 <body>
 
     {% include 'header.html' %}
-
-    {% if messages %}
-        <ul class="messages">
+    {% if messages %}    
+        <ul class="messages" class="alert alert-primary" role="alert">
             {% for message in messages %}
-            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {%if message.tags == 'info' %}
+            <div>
+              <li class="alert alert-primary form-group col-md-6 alert-dismissible fade show" role="alert">{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </li>
+            </div>
+            {% elif message.tags == 'success' %}
+            <div>
+              <li class="alert alert-success form-group col-md-6 alert-dismissible fade show" role="alert">{{ message }} 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </li>
+            </div>
+            {% elif message.tags == 'error' %}
+            <div>
+              <li class="alert alert-danger form-group col-md-6 alert-dismissible fade show" role="alert">{{ message }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </li>
+            </div>
+            {%endif%}
             {% endfor %}
         </ul>
     {% endif %}
+    
 
 
     {%block content%}
@@ -24,6 +49,25 @@
     
     {% include 'footer.html' %}
     {% include 'scripts.html' %}
+    <script>
+      tinymce.init({
+        selector: 'textarea',
+        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinymcespellchecker codesample',
+        toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | align | outdent indent |  lists | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',        
+        menubar: 'file edit view insert format tools table help',
+        toolbar_mode: 'floating',
+    
+        content_css: 'writer'
+      });
+    </script>
+    <!--
+      Highlight JS
+      
+      <script src="{% static 'js/highlight.min.js' %}"></script>
+    <script>hljs.highlightAll();</script>
+  -->
+  <script src="{% static 'js/prism.js' %}"></script>
+    
   </body>
 </html>
 

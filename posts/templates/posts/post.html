@@ -26,8 +26,8 @@
                     {%endcomment%}
                     </div>
                     <div>
-                      <a href="">Update</a>
-                      <a href="">Delete</a>
+                      <a href="{% url 'edit_post' post.id %}">Update</a>
+                      <a href="{% url 'delete_post' post.id %}">Delete</a>
                     </div>
                   </div>
                   <h1>{{ post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>

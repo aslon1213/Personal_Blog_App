@@ -5,7 +5,7 @@ from users.models import UserProfile
 # Create your models here.
 class Post(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
-    colloborators = models.ManyToManyField(UserProfile, related_name='colloborators')
+    colloborators = models.ManyToManyField(UserProfile, related_name='colloborators', blank=True, null=True)
     title = models.CharField(max_length=500, null=True)
     preview = models.CharField(max_length=100, null=True, blank=True)
     post = HTMLField()
@@ -21,11 +21,17 @@ class Post(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     id = models.UUIDField(default = uuid.uuid4,unique=True, primary_key=True, editable=False)
 
+    def get_colloborators_id(self):
+        colloborators_id_list = self.colloborators.all().values_list('id')
+        return colloborators_id_list
 
-    @property
     def update_views_count(self, num):
         self.views_count += num
+        self.save()
     
+    def update_views_count_by_1(self):
+        self.views_count += 1
+
 
     @property
     def update_comments_count(self):

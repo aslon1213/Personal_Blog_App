@@ -1,12 +1,15 @@
 {% extends 'base.html' %}
-
+{% load crispy_forms_tags %}
 
 {%block content%}
-<form method="POST" action="">
-    {%csrf_token%}
-    <input type="text" name="username" />
-    <input type="password" name="password" />
-    <input type="submit" value="Log In" />
-</form>
-<a href = "{% url 'register' %}"> Sign Up</a>
+    
+
+    <div class="card">
+        
+        <div class="card-body">
+            {%csrf_token%}
+            {% crispy form form.helper %}
+          <a href="{% url 'register' %}" class="btn btn-primary stretched-link">Sign Up</a>
+        </div>
+      </div>
 {% endblock %}

@@ -63,7 +63,7 @@ section {
 button,
 input {
   outline: none !important;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 button {
@@ -564,25 +564,25 @@ div[class*="-btn"] {
   padding: 10px 0;
   font-size: 1.6em;
   font-weight: 300;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .navbar .search-area-inner input::-moz-placeholder {
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
   color: #555;
   font-weight: 300;
   font-size: 1.1em;
 }
 
 .navbar .search-area-inner input::-webkit-input-placeholder {
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
   color: #555;
   font-weight: 300;
   font-size: 1.1em;
 }
 
 .navbar .search-area-inner input:-ms-input-placeholder {
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
   color: #555;
   font-weight: 300;
   font-size: 1.1em;
@@ -956,7 +956,7 @@ section.newsletter input {
   padding: 0 15px;
   border: 1px solid #111;
   font-size: 1.1em;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
   font-weight: 300;
 }
 
@@ -970,7 +970,7 @@ section.newsletter .submit {
   position: absolute;
   top: 0;
   right: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 /* Newsletter Section Media Query ------------------------------------- */
@@ -1182,24 +1182,24 @@ main.posts-listing .post-footer {
   border: none;
   border-bottom: 1px solid #ddd;
   font-size: 0.95em;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
   font-weight: 400;
   background: none;
 }
 
 .widget.search input::-moz-placeholder {
   color: #aaa;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .widget.search input::-webkit-input-placeholder {
   color: #aaa;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .widget.search input:-ms-input-placeholder {
   color: #aaa;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .widget.search .submit {
@@ -1483,7 +1483,7 @@ main.posts-listing .post-footer {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
   border-radius: 0;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .blog-post .add-comment input::-moz-placeholder,
@@ -1492,7 +1492,7 @@ main.posts-listing .post-footer {
   font-size: 0.9em;
   color: #aaa;
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .blog-post .add-comment input::-webkit-input-placeholder,
@@ -1501,7 +1501,7 @@ main.posts-listing .post-footer {
   font-size: 0.9em;
   color: #aaa;
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .blog-post .add-comment input:-ms-input-placeholder,
@@ -1510,7 +1510,7 @@ main.posts-listing .post-footer {
   font-size: 0.9em;
   color: #aaa;
   font-weight: 400;
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
 }
 
 .blog-post .add-comment input:focus,
@@ -2215,7 +2215,7 @@ STYLE SWITCHER FOR DEMO
  * 3. TYPE
  */
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: Consolas, monaco, monospace;
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;

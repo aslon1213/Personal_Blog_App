@@ -1,4 +1,4 @@
-# Personal_Blog_App
+# Personal_Blog_App - tasks
 1. users - app
    - auth - (email/password/username)
    - access
@@ -21,3 +21,11 @@
 6. Good editing forms
 7. Google Auth
 8. P2P messaging
+9. Share on social sites:
+  - linkedin
+  - twitter
+  - instagram
+  - facebook
+  - copy link
+10. Rss feed
+11. Topics
