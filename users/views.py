@@ -9,7 +9,7 @@ from django.contrib import messages
 from .models import UserProfile, Subscriber
 from django.contrib.auth.models import User
 #forms
-from .forms import UserLoginForm, UserRegistrationForm, SubscriberForm
+from .forms import UserLoginForm, UserRegistrationForm, SubscriberForm, EditAccountForm
 #utils
 from .utils import check_password_req
 
@@ -102,6 +102,14 @@ def account_page(request):
     profile = request.user.userprofile
     context = {'profile':profile}
     return render(request, 'users/account.html', context)
+
+@login_required(login_url='login')
+def edit_profile(request):
+    profile = request.user.userprofile
+    form = EditAccountForm()
+
+    context = {'form':form}
+    return render(request, 'users/account_edit_form.html', context)
 
 
 def contributors_page(request):

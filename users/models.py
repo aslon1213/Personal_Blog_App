@@ -15,7 +15,11 @@ class UserProfile(models.Model):
     email = models.EmailField(max_length=200)
     age = models.IntegerField(null=True, blank=True)
     profile_image = models.ImageField(null=True, blank=True, upload_to='profiles/', default="profiles/user_default.png")
-    
+
+    #info
+    short_info = models.CharField(max_length=500, null=True, blank=True)
+    extended_info = models.TextField(null=True, blank=True)
+
     #socials
     twitter = models.CharField(max_length=200, blank=True, null=True)
     github = models.CharField(max_length=200, blank=True, null=True)

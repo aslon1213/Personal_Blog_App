@@ -1,5 +1,6 @@
 
 from ast import Div
+from attr import fields
 from django.forms import ModelForm
 #custome forms
 from django import forms
@@ -93,3 +94,19 @@ class SubscriberForm(ModelForm):
     class Meta:
         model = Subscriber
         fields = ['email', 'name']
+
+    
+class EditAccountForm(ModelForm):
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.helper = FormHelper()
+        self.helper.form_class = 'blueForms'
+        self.helper.form_method = 'POST'
+        self.helper.form_action = 'login'
+        self.helper.add_input(Submit('submit', 'Submit'))
+
+
+        class Meta:
+            model = UserProfile
+            fields = '__all__'
