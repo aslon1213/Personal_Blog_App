@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block content%}
 <style>
     .post-body img {
@@ -76,7 +76,7 @@
                         </div>
                       </div>
                       <div class="comment-body">
-                        <p>{{ commenti.content }}</p>
+                        <p>{{ commenti.content  | safe  }}</p>
                       </div>
                     </div>
                     {% endfor %}

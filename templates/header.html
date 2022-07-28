@@ -1,3 +1,4 @@
+{% load static %}
 <header class="header">
   <!-- Main Navbar-->
   <nav class="navbar navbar-expand-lg">
@@ -23,7 +24,10 @@
         <!-- Toggle Button-->
         <button type="button" data-toggle="collapse" data-target="#navbarcollapse" aria-controls="navbarcollapse"
           aria-expanded="false" aria-label="Toggle navigation"
-          class="navbar-toggler"><span></span><span></span><span></span></button>
+          class="navbar-toggler">
+          <span></span>
+          <span></span>
+          <span></span></button>
       </div>
       <!-- Navbar Menu -->
       <div id="navbarcollapse" class="collapse navbar-collapse">
@@ -32,7 +36,18 @@
           </li>
           <li class="nav-item"><a href="{% url 'posts' %}" class="nav-link" >Blog</a>
           </li>
+          <li class="nav-item"> 
+            <div class="mode"><img id="chang" class="chang" width="25px" height="25px" src="{% static 'images/sun.png' %}">
+            </li>
+            <img src="" alt="">
+
+          <!--          <li class="nav-item"> <button class="btn" onclick="myFunction()">Switch mode</button> </li>-->
           {% if request.user.is_staff %}
+          
+
+
+
+
           <li class="nav-item"><a href="{% url 'create_post' %}" class="nav-link ">Create</a>
           </li>
           {% endif %}

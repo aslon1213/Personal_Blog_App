@@ -39,7 +39,8 @@ def posts(request):
 
 def post(request, pk):
     post = Post.objects.get(id=pk)
-    authentificated_profile = request.user.userprofile
+    if request.user.is_authenticated:
+        authentificated_profile = request.user.userprofile
 
     if request.method == "POST":
         comment_body = request.POST['comment_body']

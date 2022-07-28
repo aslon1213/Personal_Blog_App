@@ -26,7 +26,7 @@
 4. Comments - ✅
 5. Styling - ✅
 6. Good editing forms - ✅
-7. Google/Facebook/Github Auth 
+7. Google/Facebook/Github Auth  
 8. P2P messaging
 9. Share on social sites:
   - linkedin
