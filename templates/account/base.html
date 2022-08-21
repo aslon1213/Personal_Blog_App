@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block email_content %}
+  <main class="container">
+    {% block body %}
+
+    <!--<div>
+      <strong>Menu:</strong>
+      <ul>
+        {% if user.is_authenticated %}
+        <li><a href="{% url 'account_email' %}">Change E-mail</a></li>
+        <li><a href="{% url 'account_logout' %}">Sign Out</a></li>
+        {% else %}
+        <li><a href="{% url 'account_login' %}">Sign In</a></li>
+        <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+        {% endif %}
+      </ul>
+    </div>-->
+    {% endblock %}
+    {% block extra_body %}
+    {% endblock %}
+  </main>
+{% endblock email_content %}
+
+<!---->

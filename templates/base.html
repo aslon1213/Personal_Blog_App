@@ -10,7 +10,7 @@
 
     {% include 'header.html' %}
     {% if messages %}    
-        <ul class="messages" class="alert alert-primary" role="alert">
+        <ul class="messages" class="alert alert-primary" style="list-style-type: none;" role="alert">
             {% for message in messages %}
             {%if message.tags == 'info' %}
             <div>
@@ -45,6 +45,8 @@
 
     {%block content%}
     {%endblock content%}
+    {% block email_content%}
+    {% endblock email_content %}
     
     
     {% include 'footer.html' %}
@@ -52,7 +54,7 @@
     <script>
       tinymce.init({
         selector: 'textarea',
-        plugins: 'a11ychecker advcode casechange export formatpainter image editimage linkchecker autolink lists checklist media mediaembed pageembed permanentpen powerpaste table advtable tableofcontents tinymcespellchecker codesample',
+        plugins: ' image autolink lists  media table codesample',
         toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | align | outdent indent |  lists | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media template link anchor codesample | ltr rtl',        
         menubar: 'file edit view insert format tools table help',
         toolbar_mode: 'floating',

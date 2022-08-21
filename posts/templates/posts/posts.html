@@ -14,11 +14,13 @@
           </ul></a> 
           </li>
           <li class="list-group-item fw-bold fs-2" >{{post.title}}</li>
+          </li>
         </ul>
       </button>
     </h2>
     <div id="collapse{% cycle 'One' 'Two' 'Three' 'Four' 'Five' %}" class="accordion-collapse collapse" aria-labelledby="heading{% cycle 'One' 'Two' 'Three' 'Four' 'Five' %}" data-bs-parent="#accordionExample">
       <div class="accordion-body" >
+        <a href="{% url 'post' post.id %}">view post</a>
         <strong class="text-center">{{post.preview|slice:'200'}}</strong>
         <div> {{post.post | safe}} </div>
         <a href="{% url 'post' post.id %}">view post</a>

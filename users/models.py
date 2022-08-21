@@ -1,9 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User
 import uuid
-from django.db.models.signals import post_save, post_delete
-from django.dispatch import receiver
 
+#   for login activites
+#from django.db.models.signals import post_save, post_delete
+#from allauth.socialaccount.signals import (pre_social_login)
+#from django.dispatch import receiver
+#from django.db.models.signals import (pre_save, post_save, pre_delete, post_delete)
+#from django.contrib.auth import login, authenticate
+#from django.contrib import messages
+#from allauth.account.adapter import DefaultAccountAdapter
 class StaffUsers(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, null=True, blank=True)
 
@@ -38,12 +44,15 @@ class UserProfile(models.Model):
     
 
     #permissions
-    
     def __str__(self) -> str:
-        return str(self.username)
+        if self.username:
+            return str(self.username)
+        else:
+            return str(self.email)
 
-"""class newsletter_senders(models.Model):
-    pass"""
+
+# class newsletter_senders(models.Model):
+#     pass
 
 class Subscriber(models.Model):
     name = models.CharField(max_length=200, null=True)
@@ -67,3 +76,30 @@ class Interest(models.Model):
 
     def __str__(self) -> str:
         return self.name
+
+
+
+
+# @receiver(pre_social_login)
+# def print_social_account(request, sociallogin, *args, **kwargs):
+#     if (sociallogin.account.provider.lower() == 'google'):
+#         provider = sociallogin.account.provider
+#         email = sociallogin.account.extra_data['email']
+#         name = sociallogin.account.extra_data['name']
+#         first_name = sociallogin.account.extra_data['given_name']
+#         last_name = sociallogin.account.extra_data['family_name']
+#         try:
+#             if User.objects.get(email = email):
+#                 social_user = User.objects.get(email = email)
+#                 messages.success(request, 'You are logged in.')
+#                 login(request, social_user, backend = 'django.contrib.auth.backends.ModelBackend')
+#                 messages.success(request, 'You are logged in woogoo.')
+#         except User.DoesNotExist:
+#             user = User.objects.create_user(email, email, 'password')
+#             user.first_name = first_name
+#             user.last_name = last_name
+#             user.save()
+#             user_profile = UserProfile.objects.create(user = user, name = name, email = email)
+#             user_profile.save()
+#             messages.success(request, 'User created')
+#             login(request, user, backend = 'django.contrib.auth.backends.ModelBackend')

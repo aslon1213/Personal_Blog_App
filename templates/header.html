@@ -54,11 +54,11 @@
           <li class="nav-item" >
               {% if request.user.is_authenticated %}
               <ul class="navbar-nav">
-                <li class=""><a href="{% url 'logout' %}" class="nav-link" >Logout</a></li>
+                <li class="btn btn-light"><a href="{% url 'logout' %}" class="nav-link" >Logout</a></li>
                 <li class=" btn"> <a href="{% url 'account' %}" style="color: black;"> {{request.user.username}} </a></li>
               </ul>
               {% else %}
-              <a href="{% url 'login' %}" class="nav-link" > Log In </a>
+              <a href="{% url 'account_login' %}" class="nav-link btn btn-link" > Log In </a>
               {%endif%}
           </li>
         </ul>

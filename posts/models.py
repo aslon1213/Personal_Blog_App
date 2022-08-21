@@ -2,6 +2,7 @@ from django.db import models
 from tinymce.models import HTMLField
 import uuid
 from users.models import UserProfile
+from categories.models import Topic
 # Create your models here.
 class Post(models.Model):
     owner = models.ForeignKey(UserProfile, on_delete=models.CASCADE, null=True, blank=True)
@@ -10,6 +11,7 @@ class Post(models.Model):
     preview = models.CharField(max_length=100, null=True, blank=True)
     post = HTMLField()
     post_thumbnail = models.ImageField(null = True, blank = True, upload_to='posts/')
+    topic = models.ManyToManyField(Topic, related_name='topics', blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
     #number
     is_ready_to_post = models.BooleanField(default=False)

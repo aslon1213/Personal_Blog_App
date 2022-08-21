@@ -1,56 +1,42 @@
-from django.db.models.signals import post_save, post_delete
+from allauth.socialaccount.signals import (pre_social_login)
 from django.dispatch import receiver
-
-from django.contrib.auth.models import User
-from .models import UserProfile
-
-from django.core.mail import send_mail
-from django.conf import settings
-
-# @receiver(post_save, sender=Profile)
+from django.contrib.signals import (pre_save, post_save, pre_delete, post_delete)
+@receiver(pre_social_login)
+def print_social_account(request, sociallogin, *args, **kwargs):
+    print(*args, **kwargs)
+    print(sociallogin.account.extra_data)
 
 
-def createProfile(sender, instance, created, **kwargs):
-    if created:
-        user = instance
-        profile = UserProfile.objects.create(
-            user=user,
-            username=user.username,
-            email=user.email,
-            name=user.first_name,
-        )
+@receiver(pre_social_login)
+def print_social_connection(request, sociallogin, *args, **kwargs):
+    print(*args, **kwargs)
+    print(sociallogin.account.extra_data)
+    print(sociallogin.account.extra_data['email'])
+    print(sociallogin.account.extra_data['first_name'])
+    print(sociallogin.account.extra_data['last_name'])
+    print(sociallogin.account.extra_data['profile_image_url'])
+    print(sociallogin.account.extra_data['profile_image_url_https'])
+    print(sociallogin.account.extra_data['id'])
+    print(sociallogin.account.extra_data['url'])
+    print(sociallogin.account.extra_data['username'])
+    print(sociallogin.account.extra_data['verified'])
+    print(sociallogin.account.extra_data['email'])
+    print(sociallogin.account.extra_data['email_verified'])
+    print(sociallogin.account.extra_data['location'])
+    print(sociallogin.account.extra_data['description'])
+    print(sociallogin.account)
 
-        """subject = 'Welcome to DevSearch'
-        message = 'We are glad you are here!'
-
-        send_mail(
-            subject,
-            message,
-            settings.EMAIL_HOST_USER,
-            [profile.email],
-            fail_silently=False,
-        )"""
-
-
-def updateUser(sender, instance, created, **kwargs):
-    profile = instance
-    user = profile.user
-
-    if created == False:
-        user.first_name = profile.name
-        user.username = profile.username
-        user.email = profile.email
-        user.save()
-
-
-def deleteUser(sender, instance, **kwargs):
-    try:
-        user = instance.user
-        user.delete()
-    except:
-        pass
-
-
-post_save.connect(createProfile, sender=User)
-post_save.connect(updateUser, sender=Profile)
-post_delete.connect(deleteUser, sender=Profile)
+@receiver(pre_save)
+def pre_save_print(sender, instance, *args, **kwargs):
+    print("pre_save_print")
+    print(sender)
+    print(instance)
+    print(args)
+    print(kwargs)
+@receiver(post_save)
+def post_save_print(sender, instance, *args, **kwargs):
+    print("post_save_print")
+    print(sender)
+    print(instance)
+    print(args)
+    print(kwargs)

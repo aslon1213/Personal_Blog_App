@@ -82,7 +82,7 @@ def login_user(request):
 def logout_user(request):
     logout(request)
     messages.success(request,'User was logget out')
-    return redirect('login')
+    return redirect('account_login')
 
 
 def register_subscriber(request):

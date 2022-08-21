@@ -1,0 +1,7 @@
+asgiref
+Django
+psycopg2-binary
+sqlparse
+django-crispy-forms
+crispy-bootstrap5
+django-allauth

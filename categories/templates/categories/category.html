@@ -1,0 +1,7 @@
+{% extends 'base.html' %}
+
+
+{% for post in list %}
+
+    <p><a href="{% url 'post' post.id %}"> post.title </a></p>
+{% endfor%}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block content %}
+
+
+
+{% get_providers as socialaccount_providers %}
+
+
+<div class="container">
+  <h1>{% trans "Sign In" %}</h1>
+<form class="login col-md-6" method="POST" action="{% url 'account_login' %}">
+  {% csrf_token %}
+  {{ form | crispy }}
+  {% if redirect_field_value %}
+  <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+  {% endif %}
+  <a class="button secondaryAction btn" style="color: blue;" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a>
+  <button class="btn btn-success" type="submit">{% trans "Sign In" %}</button>    
+  <a href="{% url 'account_signup' %}" class="btn btn-primary">Sign Up</a>
+  <p> or login using one these methods</p>
+  {% if socialaccount_providers %}
+  <div class="socialaccount_ballot">
+
+    <ul class="socialaccount_providers" style="list-style-type: none;">
+      {% include "socialaccount/snippets/provider_list.html" with process="login" %}
+    </ul>
+  </div>
+{% include "socialaccount/snippets/login_extra.html" %}
+{% endif %}
+  
+
+
+</form>
+</div>
+
+{% endblock %}
