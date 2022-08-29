@@ -9,8 +9,8 @@ from django.urls import path
 urlpatterns = [
 
     #
-    path('register/', register_user, name = 'register' ),
-    path('login/', login_user, name = 'login' ),
+    # path('register/', register_user, name = 'register' ),
+    # path('login/', login_user, name = 'login' ),
     path('logout/', logout_user, name = 'logout'),
     path('register_subscriber/', register_subscriber, name = 'subscribe'),
 

@@ -16,6 +16,12 @@
                 {% if post.post_thumbnail %}
                 <div class="post-thumbnail"><img src="{{ post.post_thumbnail.url }}" alt="..." class="img-fluid"></div>
                 {% endif %}
+                <div class=""> 
+                  <p> Share on </p>
+                  {%for website, link in share_on_links.items %}
+                   <a class="twitter-share-button btn btn-primary" href="{{link}}"> {{website}}</a>
+                  {% endfor%}
+                </div>
                 <div class="post-details">
                   <div class="post-meta d-flex justify-content-between">
                     {%comment%}
@@ -25,12 +31,16 @@
                       {% endfor %}
                     {%endcomment%}
                     </div>
+                    {% if request.user.id == post.owner.user.id %}
                     <div>
-                      <a href="{% url 'edit_post' post.id %}">Update</a>
-                      <a href="{% url 'delete_post' post.id %}">Delete</a>
+                      <button type="button" class="btn btn-outline-warning"><a  href="{% url 'edit_post' post.id %}">Update</a></button>
+                      <button type = "button" class="btn btn-outline-danger"><a  href="{% url 'delete_post' post.id %}">Delete</a></button>
+                      
                     </div>
+                    {% endif %}
                   </div>
                   <h1>{{ post.title }}<a href="#"><i class="fa fa-bookmark-o"></i></a></h1>
+
                   <div class="post-footer d-flex align-items-center flex-column flex-sm-row"><a href="#" class="author d-flex align-items-center flex-wrap">
                       <div class="avatar"><img src="{{ post.owner.profile_image.url }}" alt="..." class="img-fluid"></div>
                       <div class="title"><span>{{ post.owner.username }}</span></div></a>
@@ -100,7 +110,7 @@
                   </div>
                   {% else %}
                   {% if not request.user.is_authenticated %}
-                  <a href="{% url 'login' %}" class="btn btn-primary">Login to comment</a>
+                  <a href="{% url 'account_login' %}" class="btn btn-primary">Login to comment</a>
                   {%endif%}
                   {% endif %}
                 </div>

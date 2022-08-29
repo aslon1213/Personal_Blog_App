@@ -1,9 +1,18 @@
 
+from cgitb import Hook
 from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 from .models import Post, Comment
+from django.utils.text import slugify
 from .forms import CustomPostCreationForm
+
+#redirects
+from django.views.generic.base import RedirectView
+
+HOST = 'https://127.0.0.0:8000'
+SLUGIFIED_VERSION_OF_HOST = 'https%3A//127%2E0%2E0%2E0%3A8000'
+#slugified_version_of_host = 'https%3A//something.com'
 # Create your views here.
 @login_required(login_url = 'login')
 def create_post(request):
@@ -34,8 +43,8 @@ def posts(request):
     posts = Post.objects.all()
     latest_posts = posts[:3]
     context = {'posts':posts, 'latest_posts':latest_posts, 'numbers':numbers}
-    
     return render(request, 'posts/posts.html', context)
+
 
 def post(request, pk):
     post = Post.objects.get(id=pk)
@@ -52,8 +61,9 @@ def post(request, pk):
         messages.success(request, 'You made a comment')
     comments = post.comments.all()
     post.update_views_count(1)
-    
-    return render(request, 'posts/post.html', context={'post':post, 'comments':comments})
+    links = make_post_urls(request)
+    return render(request, 'posts/post.html', context={'post':post, 'comments':comments, 'share_on_links':links})
+
 
 @login_required(login_url = 'login')
 def edit_post(request,pk):
@@ -101,3 +111,62 @@ def main_page(request):
 # def create_comment()
 # def vote()
 #messaging 
+
+
+# class share_on_social_media(RedirectView)
+#     def share_on_social_media(request,website_name):
+        
+        
+        
+        
+#         path = "{HOST}{request.path}"
+        
+
+#         message = 'I found this article very interesting. Check it out {path}'
+
+#     def get_redirect_url(*args, **kwargs):
+#         websites = {
+#             'twitter':"url",
+#             'instagram':'url',
+#             'copy_link':'url',
+#         }
+#         try:
+#             link = websites[website_name]
+#         except:
+#             return messages.error('Error in request')
+#         return link
+
+#replace white spaces with %20 ( which is white space indication in urls)
+def my_slugify(text):
+    text_arr = text.split(" ")
+    text = ''
+    for t in text_arr:
+        text += t + '%20'
+    return text
+
+# def slugify_url(url):
+    
+#     url = url.replace('/','%2F')
+
+
+#     return url
+
+def make_post_urls(request):
+    path = SLUGIFIED_VERSION_OF_HOST + str(request.path)
+    message = my_slugify('I found this article very interesting. Check it out')
+
+    websites = {
+        'twitter':'https://twitter.com/intent/tweet',
+        'linkedin':'',
+        'facebook':'',
+        
+        'instagram':'url',
+    }
+    links = {}
+    for website in websites:
+        links[website] = websites[website] + "/?url="+path+"&text="+message
+        
+    links['copy_link'] = HOST + request.path
+    return links
+#https://twitter.com/intent/tweet?url=https%3A//youtu.be/erjwCQ-UZyw&text=Forza%20Horizon%205%20Hot%20Wheels%20Expansion%20-%20First%2010%20minutes%20%7C%20Thrustmaster%20TX&via=YouTube&related=YouTube,YouTubeTrends,YTCreators
+#                               url=https%3A127%2E0%2E0%2E0%3A8000%2Fposts%2F5fe9e4da-4085-4d68-a242-17f10a85afb3

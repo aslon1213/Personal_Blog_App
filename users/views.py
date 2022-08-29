@@ -93,8 +93,10 @@ def register_subscriber(request):
             name = name,
             email = email
         )
+        print(request.content_params)
+        redirect_url = request.GET['redirect_url']
         messages.success(request, 'Thank you for subscribing')
-        return redirect('posts')
+        return redirect(redirect_url)
 
 
 @login_required(login_url='login')

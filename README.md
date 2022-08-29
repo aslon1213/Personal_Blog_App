@@ -17,6 +17,7 @@
     - editing - ✅
     - addition - ✅
   - Private/Public - ⚪️
+    - access tokens 
   - is_ready_for_publishing - ✅
   - Title - ✅
   - Body - ✅
@@ -28,12 +29,13 @@
 6. Good editing forms - ✅
 7. Google/Facebook/Github Auth  - ✅
 8. P2P messaging - ❌
-9. Share on social sites: - ❌
-  - linkedin
-  - twitter
-  - instagram
-  - facebook
-  - copy link
+9. Share on social sites: - ⚪️
+  - linkedin - ⚪️
+  - twitter - ✅
+  - instagram - ⚪️
+  - facebook - ⚪️
+  - copy link button - ⚪️
+  - redirects to another websites
 10. Rss feed - ❌
 12. Random - ❌
 13. Dark/Light modes - ✅

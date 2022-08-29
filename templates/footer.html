@@ -18,6 +18,7 @@
             <li class="list-inline-item"><a href="#"><i class="fa fa-pinterest"></i></a></li>
           </ul>
         </div>
+        <div id="mymodal_here"> <p>smoesfd</p></div>
       </div>
       <div class="col-md-4">
         <div class="menus d-flex">
@@ -64,7 +65,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form action="{% url 'subscribe' %}" method="POST">
+        <form action="{% url 'subscribe' %}?redirect_url={{request.path}}" method="POST">
           {% csrf_token %}
             <!-- Email input -->
             <div class="form-outline mb-4">

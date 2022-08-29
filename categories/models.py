@@ -5,6 +5,7 @@ import uuid
 
 class Topic(models.Model):
     name = models.CharField(max_length=100, unique=True)
+    image = models.ImageField(upload_to = 'topics/')
     id = models.UUIDField(default = uuid.uuid4,unique=True, primary_key=True, editable=False)
     #created and ID
 
